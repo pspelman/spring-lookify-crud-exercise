@@ -1,4 +1,6 @@
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@taglib prefix="t" tagdir="/WEB-INF/tags" %>
 
 <!doctype html>
 <html lang="en">
@@ -7,30 +9,73 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/style.css">
+    <script type="text/javascript" src="${pageContext.request.contextPath}/js/scripts.js"></script>
+
     <title>Lookify Dashboard</title>
 </head>
 <body>
-    <div class="container">
-        <div class="top_nav">
-            Top nav<br/>
-            ${top_nav_message}
 
-            <a href="/songs/new">
-                New
-            </a>
-            || <a href="/songs/topTen">top 10 songs</a>
-        </div>
+
+    <div class="container">
+        <t:generic_navbar>
+            <jsp:attribute name="top_nav">
+            </jsp:attribute>
+        </t:generic_navbar>
     <br/>
         <div class="songlist">
-            <h3>Here's a table of the songs</h3>
-            <table>
-                <tr>
-                    <td>TITLE</td>
-                    <td>RATING</td>
-                    <td>ACTION (delete)</td>
-                </tr>
-            </table>
+                <%--${loop.index+1}. ${song} <br/>--%>
+        <h3>Song Dash - -</h3>
+                <table class="table table-bordered">
+                    <thead>
+                    <tr>
+                        <th scope="col">
+                            #
+                        </th>
+                        <th scope="col">
+                            Title
+                        </th>
+                        <th scope="col">
+                            Artist
+                        </th>
+                        <th scope="col">
+                            Rating
+                        </th>
+                        <th scope="col">
+                            Action
+                        </th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <%--for loop can go here, or in the tr tag --%>
+                    <c:forEach var="song" items="${songs}" varStatus="loop" >
+                    <tr>
+                        <th scope="row">
+                            ${loop.index+1}
+                        </th>
+                        <th scope="row">
+                            ${song.title}
+                                <a href="songs/view/${song.id}">get song: ${song.id}</a>
+
+                        </th>
+                        <td>
+                            ${song.artist}
+                        </td>
+                        <td>
+                            ${song.rating}
+                        </td>
+                        <td>
+                            <button name="delete" class="table-btn btn-danger" value="Delete" href="/items/delete/item.id">remove</button>
+                        </td>
+                    </tr>
+                    </c:forEach>
+                    </tbody>
+                </table>
+
         </div>
+
+
+
 
 
 

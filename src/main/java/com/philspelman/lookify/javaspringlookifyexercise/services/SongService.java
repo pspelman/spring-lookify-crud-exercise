@@ -53,7 +53,7 @@ public class SongService {
             return songs;
         } else {
             System.out.println("No songs found by that artist");
-            return null;
+            return songs;
         }
     }
 
@@ -63,8 +63,15 @@ public class SongService {
 //        List<Song> topTenSongs = songRepository.findTopByRating();
         //FIXME: need to look at sorting https://docs.jboss.org/hibernate/orm/5.2/userguide/html_single/Hibernate_User_Guide.html#collections-sorted-set
 
-        return allSongs();
+        List<Song> songs = songRepository.findTop10ByOrderByRatingDesc();
 
+        if (songs.size() > 0) {
+            System.out.println("got songs for top 10");
+            return songs;
+        } else {
+            System.out.println("No songs");
+            return songs;
+        }
     }
 
 

@@ -4,7 +4,7 @@
     background-color: rgba(131, 188, 188, 0.72);
     text-align: center;
 
-    padding-top: 5%;
+    /*padding-top: 5%;*/
     padding-bottom: 5%;
 
 }
@@ -56,10 +56,13 @@ a:visited {
 
 .top_nav {
     vertical-align: center;
-    padding-top:2%;
-    width: 100%;
-    border: 2px solid red;
-    background-color: rgba(72, 61, 139, 0.67);
+    padding-top: 2%;
+    /*width: 100%;*/
+    width: border-box;
+
+    border: 1px solid rgba(40, 67, 99, 0.69);
+
+    background-color: rgba(72, 61, 139, 0.53);
     font-size: 8pt;
 
 }

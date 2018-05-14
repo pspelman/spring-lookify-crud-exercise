@@ -1,5 +1,6 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@taglib prefix="t" tagdir="/WEB-INF/tags" %>
 <!doctype html>
 <html lang="en">
 <head>
@@ -14,6 +15,11 @@
 </head>
 <body>
 <div class="container">
+    <t:generic_navbar>
+            <jsp:attribute name="top_nav">
+            </jsp:attribute>
+    </t:generic_navbar>
+
     <div class="foreground">
 
     <h3>Submit a new song!</h3>
@@ -48,8 +54,6 @@
         <input type="submit">
 
     </form:form>
-        <br/>
-        <a href="/">Back</a>
     </div>
 </div>
 

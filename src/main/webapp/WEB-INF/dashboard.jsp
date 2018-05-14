@@ -16,7 +16,7 @@
 </head>
 <body>
 
-
+${search_errors}
     <div class="container">
         <t:generic_navbar>
             <jsp:attribute name="top_nav">
@@ -54,8 +54,7 @@
                             ${loop.index+1}
                         </th>
                         <th scope="row">
-                            ${song.title}
-                                <a href="songs/view/${song.id}">get song: ${song.id}</a>
+                            <a href="songs/view/${song.id}">${song.title}</a>
 
                         </th>
                         <td>

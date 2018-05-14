@@ -5,6 +5,8 @@ import com.philspelman.lookify.javaspringlookifyexercise.services.SongService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
+import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.*;
 
 import javax.naming.Binding;
@@ -47,8 +49,26 @@ public class SongsController {
     public String getTopTenSongs() {
         System.out.println("SongsController: request for top ten songs...fetching songs");
 
+        List<Song> songs = songService.getTopTenSongs();
+        iterateSongListResults(songs);
+
+        //FIXME: need to look at sorting https://docs.jboss.org/hibernate/orm/5.2/userguide/html_single/Hibernate_User_Guide.html#collections-sorted-set
+
 
         return "topTen";
+    }
+
+    protected static void iterateSongListResults(List<Song> songs) {
+        for (Object object : songs) {
+            if(object instanceof Song) {
+                Song song = (Song) object;
+                System.out.println(song.toString());
+            }
+            if(object instanceof ObjectError) {
+                ObjectError objectError = (ObjectError) object;
+                System.out.println(objectError.getCode());
+            }
+        }
     }
 
 
@@ -74,22 +94,34 @@ public class SongsController {
 
             songService.addSong(song);
 
-            return "redirect:/";
+            return "redirect:/dashboard";
         }
 
 
     }
 
     //TODO: add @GetMapping("songs/search/artist?{artistNameString}")
-    @RequestMapping("/songs/search/artist{artistNameString}")
-    public String getSongsByArtist(@PathVariable String artistNameString, Model model) {
+    @RequestMapping("/songs/search/artist")
+    public String getSongsByArtist(Model model,
+                                   @RequestParam(value = "artistNameString") String artistNameString) {
 
+        System.out.println("trying to get songs by artist: " + artistNameString);
         //fixme: change the request so it gets all songs by the inputted artist name
-        List<Song> songs = songService.allSongs();
+        List<Song> songs = songService.getSongsByArtist(artistNameString);
 
-        model.addAttribute("artistSongs", songs);
+        iterateSongListResults(songs);
 
-        return "artist_songs";
+
+        if (songs.size() == 0) {
+            model.addAttribute("error", "No songs by that artist were available");
+            return "dashboard";
+        } else {
+            model.addAttribute("songs", songs);
+            return "artist_songs";
+
+        }
+//        return "dashboard";
+
     }
 
 
@@ -101,6 +133,14 @@ public class SongsController {
 
 
     //TODO: add @RequestMapping("/songs/delete/{id}") for deleting a specific song
+    @RequestMapping("/songs/delete/{id}")
+    public String destroySong(@PathVariable Long id) {
+        System.out.println("got request to delete song: " + id);
+
+        songService.destroySong(id);
+
+        return "redirect:/dashboard";
+    }
 
 
 

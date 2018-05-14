@@ -10,7 +10,7 @@
     <a href="/songs/new" class="navbar-link">Add new song</a>
     <a href="/songs/topTen" class="navbar-link">top 10 songs</a>
     <form name="artist_search_form" action="/songs/search/artist" method="get" class="form-inline nav_artist_search">
-        <input type="text" name="artist_name">
+        <input type="text" name="artistNameString">
         <input type="submit" class="btn-inverse" value="search">
     </form>
     <%--${dashboard_message}--%>

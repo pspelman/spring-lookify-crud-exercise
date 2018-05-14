@@ -20,6 +20,9 @@ public interface SongRepository extends CrudRepository<Song, Long> {
     //SEE TOP TEN SONGS (by rating)
     List<Song> findDistinctTopByRating(Long search);
 
+    //FIXME: need to look at sorting https://docs.jboss.org/hibernate/orm/5.2/userguide/html_single/Hibernate_User_Guide.html#collections-sorted-set
+//    List<Song> findTopByRating(Long rating);
+
 
 
 }

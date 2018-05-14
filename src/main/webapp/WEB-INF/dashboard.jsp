@@ -65,7 +65,7 @@
                             ${song.rating}
                         </td>
                         <td>
-                            <button name="delete" class="table-btn btn-danger" value="Delete" href="/items/delete/item.id">remove</button>
+                            <button name="delete" class="table-btn btn-danger" value="Delete" onclick="location.href='/songs/delete/${song.id}';">remove</button>
                         </td>
                     </tr>
                     </c:forEach>

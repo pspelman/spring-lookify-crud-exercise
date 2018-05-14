@@ -1,4 +1,5 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <!doctype html>
 <html lang="en">
 <head>
@@ -14,6 +15,7 @@
 <body>
     <div class="container">
         <h3>Editing this song: ____ song goes here ____</h3>
+        <h4>May need to edit the model paths to song.attribute</h4>
 
 <br/>
 
@@ -44,6 +46,7 @@
                 <form:input path="rating"/>
             </form:label>
 
+            <%--MUST HAVE ID--%>
             <form:hidden path="id"/>
             <input type="submit">
 
